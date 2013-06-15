@@ -34,9 +34,6 @@
 #include "random.h"
 #include <math.h>
 
-/* FIXME: Replace with a DEBUG_MC symbol for use with -d. */
-static int mc_debug = 0;
-
 #define TURN_OFF_ASSERTIONS 1
 
 
@@ -1559,7 +1556,7 @@ mc_generate_random_move(struct mc_game *game)
    * FIXME: Handle this in some proper way.
    */
   if (depth > 600) {
-    if (mc_debug) {
+    if (debug & DEBUG_MC) {
       int pos;
       fprintf(stderr, "Reached 600 iterations.\n");
       mc_showboard(mc, stderr);
@@ -2187,7 +2184,7 @@ uct_genmove(int color, int *move, int *forbidden_moves, int *allowed_moves,
     uct_dump_tree(&tree, "/tmp/ucttree.sgf", color, 50);
     
   /* Print information about the search tree. */
-  if (mc_debug) {
+  if (debug & DEBUG_MC) {
     while (1) {
       float mean;
       float std;
